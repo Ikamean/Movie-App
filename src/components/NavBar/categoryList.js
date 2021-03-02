@@ -3,7 +3,7 @@ import CategoryButton from './categoryButton';
 import styled from 'styled-components';
 
 const CategoryList = () => {
-    const categoryArray = ["Top Rated", "Popular" , "Upcoming", "Latest", "Favorites" ]
+    const categoryArray = ["Top Rated", "Popular" , "Upcoming", "Latest", "Favourites" ]
 
     return(
         <CategoryDiv>

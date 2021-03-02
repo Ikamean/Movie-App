@@ -62,7 +62,7 @@ const App = () => {
             <Home />
         </Route>
 
-        <Route exact path='/category/Favorites'>
+        <Route exact path='/category/Favourites'>
           <RatedMovies />
         </Route>
 

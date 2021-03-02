@@ -19,7 +19,7 @@ const CategoryButton = ({ value }) => {
         if( value === 'Latest' ){
             history.push(`/latest`)
         }
-        if( value === 'Favorites'){
+        if( value === 'Favourites'){
             window.location.reload(true);
         }
         

@@ -154,7 +154,7 @@ const Heart = styled.div`
 const DisabledHeartBtn = styled.button`
     width:100%;
     padding: 10px;
-    border: 1px dotted ${ props => props.theme.colors.pink};
+    border: none;
     outline: none;
     border-radius: 30px;
     border: none;
@@ -166,7 +166,7 @@ const HeartBtn = styled.button`
     width:92px;
     padding: 10px;
     cursor: pointer;
-    border: 1px dotted ${ props => props.theme.colors.pink};
+    border: none;
     outline: none;
     border-radius: 30px;
     background-color: transparent;
