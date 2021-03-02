@@ -21,7 +21,8 @@ const Detailed = ({ movie }) => {
 
     return(
         <div>
-            <Background src={`${imgBaseUrl}original${backGroundUrl}`} />
+            { backGroundUrl &&  <Background src={`${imgBaseUrl}original${backGroundUrl}`} /> }
+            
             
             <Movie>
             

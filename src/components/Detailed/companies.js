@@ -25,7 +25,7 @@ const Company = ({ company }) => {
     return(
         
             urlRegex.test(homepage) ? 
-            <a href={homepage} target='_blank' rel='noreferrer'>
+            <a href={homepage} target='_blank'  rel='noreferrer'>
             <CompanyCard>
                 <CompanyName>
                     {company.name}

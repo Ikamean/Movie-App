@@ -11,20 +11,25 @@ const CategoryButton = ({ value }) => {
     const handleClick = () => {
         
         dispatch( initializeCategory(value));
-
-        
-        
-        history.push(`/category/${value}`);
-
-        if( value === 'Latest' ){
-            history.push(`/latest`)
-        }
-        if( value === 'Favourites'){
-            window.location.reload(true);
-        }
-        
+        history.push(`/category`);
     }
-    
+
+    const handleFavourite = () =>{
+        history.push('/Favourites')
+        window.location.reload(true);
+    }
+
+    if( value === 'Favourites'){
+        return(
+            <CategoryBtn onClick={()=>handleFavourite()}>{value}</CategoryBtn>
+        ) 
+    }
+
+    if( value === 'Latest'){
+        return(
+            <CategoryBtn onClick={()=> history.push('/latest')}>{value}</CategoryBtn>
+        ) 
+    }
 
     return(
         <CategoryBtn onClick={()=>handleClick()}>{value}</CategoryBtn>
