@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
 import { rateMovie } from '../../services/guestSession';
 import { userMarkFavouriteMovie } from '../../services/userSession'
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styled from 'styled-components';
+import {initializeGuestRatedMovies} from '../../redux/reducers/guestMoviesReducer';
+import { initializeUserFavourites } from '../../redux/reducers/userSessionReducer';
 
 const MovieCard = ({ movie }) => {
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
@@ -45,30 +47,28 @@ const MovieCard = ({ movie }) => {
 
     const handleRate = async (e) => {
         e.preventDefault()
-        setTimeout(()=>{
-            window.location.reload(false);
-        }, 500);
-
+        
         setFavourite(true)
 
         if(guestSession){
             await rateMovie(movie_id, rating, 'guest_session_id', guestSession)
+            await dispatch(initializeGuestRatedMovies(guestSession))
         }
         if(userSession){
             await userMarkFavouriteMovie(accountId,userSession,movie.id,true)
+            await dispatch(initializeUserFavourites(userSession))
         }
         
     }
     const handleDeleteFavourite = async (e) =>{
         e.preventDefault()
 
-        setTimeout(()=>{
-            window.location.reload(false);
-        }, 500);
+        
 
         setFavourite(false);
 
         await userMarkFavouriteMovie(accountId,userSession,movie.id,false)
+        await dispatch(initializeUserFavourites(userSession))
     }
 
 
