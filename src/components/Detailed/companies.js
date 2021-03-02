@@ -5,7 +5,7 @@ import {getCompanyHomepage} from '../../services/service';
 
 const Company = ({ company }) => {
 
-    const imgBaseUrl = useSelector( state => state.config.imagesConfig.base_url);
+    const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
 
     const id = company.id;
     const urlRegex = /www/;

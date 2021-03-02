@@ -8,7 +8,7 @@ import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import styled from 'styled-components';
 
 const MovieCard = ({ movie }) => {
-    const imgBaseUrl = useSelector( state => state.config.imagesConfig.base_url);
+    const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const history = useHistory();
     const dispatch = useDispatch();
 

@@ -4,7 +4,6 @@ import { FaGithub, FaLinkedinIn, FaFacebook } from "react-icons/fa";
 
 const Footer = () => {
    const userName = localStorage.getItem('AccountUsername');
-   const name = localStorage.getItem('AccountName');
 
 
     return(

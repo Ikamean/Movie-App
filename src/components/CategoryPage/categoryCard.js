@@ -6,7 +6,7 @@ import { Poster, NoPoster, MovieDate } from '../Homepage/movieCard';
 import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
 
 const CategoryCard = ({ movie }) => {
-    const imgBaseUrl = useSelector( state => state.config.imagesConfig.base_url);
+    const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const history = useHistory();
     const dispatch = useDispatch();
 

@@ -9,7 +9,7 @@ import Company from './companies';
 
 const Detailed = ({ movie }) => {
     const similarMovies = useSelector( state=> state.similar.movies )
-    const imgBaseUrl = useSelector( state => state.config.imagesConfig.base_url);
+    const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const backGroundUrl = movie.backdrop_path;
     const companies = movie.production_companies;
 
@@ -85,7 +85,7 @@ const Detailed = ({ movie }) => {
                         </OverwievContent>
                     </OverviewContainer>
                 </Details>
-               
+            
             </Movie>
     
             {   (similarMovies &&
