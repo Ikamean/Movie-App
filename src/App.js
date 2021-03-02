@@ -16,6 +16,7 @@ import { initializeUserFavourites } from './redux/reducers/userSessionReducer';
 import Theme from './Theme/theme';
 import Footer from './Footer/footer';
 import Latest from './pages/Latest/latest';
+import Test from './pages/test';
 
 const App = () => {
   const dispatch = useDispatch()
@@ -63,7 +64,7 @@ const App = () => {
         </Route>
 
         <Route exact path='/favourites'>
-          <RatedMovies />
+          <Test />
         </Route>
 
         <Route exact path='/movie/:name'>
