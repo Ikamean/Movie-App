@@ -15,7 +15,7 @@ const CategoryButton = ({ value }) => {
     }
 
     const handleFavourite = () =>{
-        history.push('/Favourites')
+        history.push('/favourites');
         window.location.reload(true);
     }
 
