@@ -17,7 +17,7 @@ const Search = () => {
 
     const handleClick = async (e) => {
         e.preventDefault();
-
+        
         if(search.length > 0){
             await dispatch( initializeSearchedMovies(search) );
             console.log(search);

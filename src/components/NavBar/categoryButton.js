@@ -21,6 +21,7 @@ const CategoryButton = ({ value }) => {
 
     if( value === 'Favourites'){
         return(
+            
             <CategoryBtn onClick={()=>handleFavourite()}>{value}</CategoryBtn>
         ) 
     }

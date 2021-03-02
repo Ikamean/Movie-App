@@ -31,9 +31,9 @@ const App = () => {
   const initializeState = async () =>{
       let random = Number(getRandomPage());
       await dispatch (initializeConfiguration());
-      await dispatch (initializePopular('popular',random));
-      await dispatch (initializeTopRated('top_rated',random));
-      await dispatch (initializeUpcoming('upcoming',random));
+      await dispatch (initializePopular('popular',1));
+      await dispatch (initializeTopRated('top_rated',1));
+      await dispatch (initializeUpcoming('upcoming',1));
       await dispatch (initializeLatest('latest'));
       await dispatch (initializeGenres());
       if(guestSessionID){

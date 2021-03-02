@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
 import { rateMovie } from '../../services/guestSession';
 import { userMarkFavouriteMovie } from '../../services/userSession'
@@ -45,6 +45,9 @@ const MovieCard = ({ movie }) => {
 
     const handleRate = async (e) => {
         e.preventDefault()
+        setTimeout(()=>{
+            window.location.reload(false);
+        }, 500);
 
         setFavourite(true)
 
@@ -57,7 +60,11 @@ const MovieCard = ({ movie }) => {
         
     }
     const handleDeleteFavourite = async (e) =>{
-        e.preventDefault();
+        e.preventDefault()
+
+        setTimeout(()=>{
+            window.location.reload(false);
+        }, 500);
 
         setFavourite(false);
 
@@ -67,17 +74,16 @@ const MovieCard = ({ movie }) => {
 
     return(
         <Card>
-            <Heart>
-                { (guestSession || userSession) &&
-                !favourite && !hideFavouriteButton  ?
-                    <HeartBtn onClick={(e)=> handleRate(e)}><FcLikePlaceholder /></HeartBtn> : 
-                    userSession ? 
-                    <HeartBtn onClick={(e)=> handleDeleteFavourite(e)}><FcLike /></HeartBtn> :
-                    guestSession && <DisabledHeartBtn > <FcLike /> </DisabledHeartBtn> 
-                    
-                }
-            </Heart>
-
+                <Heart>
+                    { (guestSession || userSession) &&
+                    !favourite && !hideFavouriteButton  ?
+                        <HeartBtn onClick={(e)=> handleRate(e)}><FcLikePlaceholder /></HeartBtn> : 
+                        userSession ? 
+                        <HeartBtn onClick={(e)=> handleDeleteFavourite(e)}><FcLike /></HeartBtn> :
+                        guestSession && <DisabledHeartBtn > <FcLike /> </DisabledHeartBtn> 
+                        
+                    }
+                </Heart>     
             <div onClick={()=>handleClick()}>
                 {
                     movie.poster_path ? 
@@ -148,10 +154,10 @@ const Card = styled.div`
     justify-content: space-evenly;
     height: 100%;
 `
-const Heart = styled.div`
+export const Heart = styled.div`
     width: 100%;
 `
-const DisabledHeartBtn = styled.button`
+export const DisabledHeartBtn = styled.button`
     width:100%;
     padding: 10px;
     border: none;
@@ -162,7 +168,7 @@ const DisabledHeartBtn = styled.button`
     margin-bottom: 10px;
     transition: all 0.5s ease;
 `
-const HeartBtn = styled.button`
+export const HeartBtn = styled.button`
     width:92px;
     padding: 10px;
     cursor: pointer;

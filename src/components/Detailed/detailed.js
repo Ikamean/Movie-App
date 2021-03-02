@@ -1,31 +1,34 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { TiMediaPlay } from 'react-icons/ti';
 import { BsFillStarFill } from 'react-icons/bs';
-import MovieCard from '../Homepage/movieCard';
 import Company from './companies';
+import CategoryCard from '../CategoryPage/categoryCard';
+import { Heart, HeartBtn, DisabledHeartBtn } from '../Homepage/movieCard';
+import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 
 
 const Detailed = ({ movie }) => {
     const similarMovies = useSelector( state=> state.similar.movies )
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
-    const backGroundUrl = movie.backdrop_path;
     const companies = movie.production_companies;
 
+    const [ favourite, setFavourite ] = useState(false);
+    let hideFavouriteButton = true;
+
+    const guestSession = localStorage.getItem('guestSessionID');
+    const userSession = localStorage.getItem('userSessionID');
+
+    
 
     useEffect(()=> {
 
     }, [])
-    
 
     return(
         <div>
-            { backGroundUrl &&  <Background src={`${imgBaseUrl}original${backGroundUrl}`} /> }
-            
-            
             <Movie>
-            
                 <Image>
                 {
                     movie.poster_path ? 
@@ -46,7 +49,16 @@ const Detailed = ({ movie }) => {
                 </Image>
                 
                 <Details>
-                    
+                <Heart>
+                    { (guestSession || userSession) &&
+                    !favourite && !hideFavouriteButton  ?
+                        <HeartBtn ><FcLikePlaceholder /></HeartBtn> : 
+                        userSession ? 
+                        <HeartBtn ><FcLike /></HeartBtn> :
+                        guestSession && <DisabledHeartBtn > <FcLike /> </DisabledHeartBtn> 
+                        
+                    }
+                </Heart>     
                     <Rating>
                         <Average> <BsFillStarFill /> {movie.vote_average} </Average>
                         <Runtime>
@@ -95,7 +107,7 @@ const Detailed = ({ movie }) => {
                 <SimilarHeader><i> Similar Movies </i></SimilarHeader>
                 <SimilarList>
                     
-                    { similarMovies.map( movie => <MovieCard key={movie.id} movie={movie} /> )}
+                    { similarMovies.map( movie => <CategoryCard key={movie.id} movie={movie} /> )}
                 </SimilarList>
             </Similar>   
             }
@@ -113,21 +125,7 @@ const Detailed = ({ movie }) => {
 }
 
 export default Detailed
-// `${imgBaseUrl}w92${movie.poster_path}`
-// background-image: url(${props => props.img});
-//
 
-
-const Background = styled.img`
-    position: absolute;
-    opacity: 0.3;
-    z-index: -1;
-    width: 100%;
-    height: 231px;
-    @media(min-width: 650px){
-        height: 513px;
-    } 
-`
 
 const Similar = styled.div`
     display: flex;
@@ -161,7 +159,8 @@ const Movie = styled.div`
     margin: 20px 30px;
     outline: none;
     border-radius: 8px;
-    border: 1px solid transparent;
+    border: none;
+    box-shadow : 1px 1px ${ props => props.theme.colors.primary }; 
     @media(min-width: 650px){
         margin: 50px 60px;
         height: 513px;
