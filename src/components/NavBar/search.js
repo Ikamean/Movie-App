@@ -12,14 +12,14 @@ const Search = () => {
     const handleChange = (e) =>{
         e.preventDefault();
         setSearch(e.target.value);
-        
+        localStorage.setItem('searchValue',e.target.value);
     }
 
     const handleClick = async (e) => {
         e.preventDefault();
-        
-        if(search.length > 0){
-            await dispatch( initializeSearchedMovies(search) );
+        let value = localStorage.getItem('searchValue');
+        if(value.length > 0){
+            await dispatch( initializeSearchedMovies(value) );
             console.log(search);
             setSearch('');
             history.push('/search');

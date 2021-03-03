@@ -12,6 +12,17 @@ export const rateMovie = async (movie_id, rating, session, session_ID) => {
     return data
 }
 
+export const deleteRating = async (movie_id,guest_session_id) => {
+    let res = await axios.delete(`
+    https://api.themoviedb.org/3/movie/${movie_id}/rating?api_key=${key}&guest_session_id=${guest_session_id}`,
+    {
+        'Content-Type' : 'application/json;charset=utf-8'
+    }
+    );
+    let data = res.data;
+    return data
+}
+
 export const getGuestRatedMovies = async (guest_session_id) => {
     let res = await axios.get(`https://api.themoviedb.org/3/guest_session/${guest_session_id}/rated/movies?api_key=${key}&language=en-US&sort_by=created_at.asc`);
     let data = res.data.results;

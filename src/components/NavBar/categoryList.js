@@ -23,5 +23,5 @@ const CategoryDiv = styled.div`
     align-items: center;
     @media (max-width: 360px) {
     justify-content: center;
-  }
+    }
 `

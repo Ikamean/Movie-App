@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { initializeConfiguration } from './redux/reducers/configReducer';
 import { initializePopular, initializeLatest, initializeTopRated, initializeUpcoming } from './redux/reducers/movieReducer';
 import { initializeGenres } from './redux/reducers/genresReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Home from './pages/Homepage/homePage';
 import MoviePage from './pages/MoviePage/moviePage';
 import CategoryPage from './pages/CategoryPage/categoryPage';
@@ -22,7 +22,7 @@ const App = () => {
 
   const guestSessionID = localStorage.getItem('guestSessionID');
   const sessionUserID = localStorage.getItem('userSessionID');
-  
+
   const getRandomPage = () => {
     return Math.floor(Math.random() * 10) + 1
   }
@@ -31,9 +31,9 @@ const App = () => {
   const initializeState = async () =>{
       let random = Number(getRandomPage());
       await dispatch (initializeConfiguration());
-      await dispatch (initializePopular('popular',1));
-      await dispatch (initializeTopRated('top_rated',1));
-      await dispatch (initializeUpcoming('upcoming',1));
+      await dispatch (initializePopular('popular',random));
+      await dispatch (initializeTopRated('top_rated',random));
+      await dispatch (initializeUpcoming('upcoming',random));
       await dispatch (initializeLatest('latest'));
       await dispatch (initializeGenres());
       if(guestSessionID){

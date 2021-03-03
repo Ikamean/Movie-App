@@ -6,35 +6,33 @@ import { FcRefresh } from "react-icons/fc";
 import { useHistory } from 'react-router';
 
 const CategoryPage = () => {
-    const category = useSelector( state => state.category.category);
+    const category = useSelector(state => state.category.category) || localStorage.getItem('category');
     const upComing = useSelector( state => state.movies.upcoming);
     const topRated = useSelector( state => state.movies.topRated);
     const popular = useSelector( state => state.movies.popular);
 
     const history = useHistory();
 
-    
+    console.log(category);
 
 
 
     if(category === 'Top Rated'){
         return(
-            <CategoryWrapper>
-                <CategoryTitle>Top Rated Movies</CategoryTitle>
-                <GridList >
-                    
-                    { 
-                        topRated.map( t => <CategoryCard key={t.id} movie={t} /> )
-                    }
-                </GridList>
-            </CategoryWrapper>
+                <GridWrapper >
+                    <GridList >
+                        
+                        { 
+                            topRated.map( t => <CategoryCard key={t.id} movie={t} /> )
+                        }
+                    </GridList>
+                </GridWrapper>
         )
     }
 
     if(category === 'Popular'){
         return(
-            <CategoryWrapper>
-                <CategoryTitle>Popular Movies</CategoryTitle>
+            <GridWrapper >
                 <GridList >
 
                 {
@@ -42,21 +40,20 @@ const CategoryPage = () => {
                 }
 
                 </GridList>
-            </CategoryWrapper>
+            </GridWrapper>
         )
     }
 
     if(category === 'Upcoming'){
         return(
-            <CategoryWrapper>
-                <CategoryTitle>Upcoming Movies</CategoryTitle>
+            <GridWrapper >
                 <GridList >
 
                 { 
                     upComing.map( t => <CategoryCard key={t.id} movie={t} /> )
                 }
                 </GridList>
-            </CategoryWrapper>
+            </GridWrapper>
         )
     }
 
@@ -91,25 +88,19 @@ const Refresh = styled.div`
     height: 40vh;
 `
 
-
-
-export const CategoryWrapper = styled.div`
+export const GridWrapper = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    justify-content: flex-start;
-    align-content: center;
 `
 
-export const CategoryTitle = styled.h2`
-    margin-top: 10px;
-    margin-left: 10px;
-`
+
+
 
 export const GridList = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    padding: 10px;
+    padding: 1.5rem 1.5rem;
     @media (min-width: 750px) {
         grid-template-columns: 1fr 1fr 1fr 1fr  ; 
     }

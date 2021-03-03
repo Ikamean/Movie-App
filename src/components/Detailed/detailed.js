@@ -1,30 +1,74 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import styled from 'styled-components';
 import { TiMediaPlay } from 'react-icons/ti';
 import { BsFillStarFill } from 'react-icons/bs';
 import Company from './companies';
 import CategoryCard from '../CategoryPage/categoryCard';
-import { Heart, HeartBtn, DisabledHeartBtn } from '../Homepage/movieCard';
+import { Heart } from '../Homepage/movieCard';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+import { rateMovie } from '../../services/guestSession';
+import { userMarkFavouriteMovie } from '../../services/userSession';
+import {initializeGuestRatedMovies} from '../../redux/reducers/guestMoviesReducer';
+import { initializeUserFavourites } from '../../redux/reducers/userSessionReducer';
 
 
 const Detailed = ({ movie }) => {
+
+    const dispatch = useDispatch();
+
     const similarMovies = useSelector( state=> state.similar.movies )
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const companies = movie.production_companies;
 
     const [ favourite, setFavourite ] = useState(false);
-    let hideFavouriteButton = true;
+    const [ trigger, setTrigger ] = useState(false);
+    
+    const rating = 10;
+
+    const guestFavourites = useSelector( state => state.guestSession.guestRatedMovies);
+    const userFavourites = useSelector( state => state.userSession.userFavourites);
 
     const guestSession = localStorage.getItem('guestSessionID');
     const userSession = localStorage.getItem('userSessionID');
+    const accountId = localStorage.getItem('accountId');
 
+
+    const handleFavourite = async () => {
+        if(guestSession && !favourite){
+            let success = await rateMovie(movie.id, rating, 'guest_session_id', guestSession);
+            await dispatch(initializeGuestRatedMovies(guestSession))
+            setFavourite(success.success)
+        }
+        if(userSession){
+            if(!favourite) {
+                await userMarkFavouriteMovie(accountId,userSession,movie.id,true);
+            }else{
+                await userMarkFavouriteMovie(accountId,userSession,movie.id,false);
+            }
+            await dispatch(initializeUserFavourites(userSession))
+            setTrigger(!trigger);
+        }
+    }
     
 
     useEffect(()=> {
+        let added = false;
+        if(guestSession){
+            added = guestFavourites.some( g => g.id === movie.id )
+            if(added){
+                setFavourite(added);
+            }
+            //
+        }
+        if(userSession){
+            added = userFavourites.some( g => g.id === movie.id )
+            
+            setFavourite(added);
+        }
 
-    }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [favourite,trigger])
 
     return(
         <div>
@@ -49,16 +93,29 @@ const Detailed = ({ movie }) => {
                 </Image>
                 
                 <Details>
-                <Heart>
-                    { (guestSession || userSession) &&
-                    !favourite && !hideFavouriteButton  ?
-                        <HeartBtn ><FcLikePlaceholder /></HeartBtn> : 
-                        userSession ? 
-                        <HeartBtn ><FcLike /></HeartBtn> :
-                        guestSession && <DisabledHeartBtn > <FcLike /> </DisabledHeartBtn> 
+                    {
+                        (guestSession || userSession) &&
+                        <Heart onClick={()=>handleFavourite()}>
                         
+                        {
+                             // Handling Guest Session Liking
+                            guestSession && !favourite && <FcLikePlaceholder />
+                        }
+                        {
+                            guestSession && favourite && <FcLike />
+                        }
+
+                         {  // Handling User Session Liking and disliking
+                            userSession && !favourite && <FcLikePlaceholder />
+                        }
+                        {
+                            userSession && favourite && <FcLike />
+                        }
+                    
+                    </Heart>
                     }
-                </Heart>     
+                        
+                        
                     <Rating>
                         <Average> <BsFillStarFill /> {movie.vote_average} </Average>
                         <Runtime>
@@ -101,8 +158,8 @@ const Detailed = ({ movie }) => {
             
             </Movie>
     
-            {   (similarMovies &&
-                similarMovies.length > 0) &&
+            {  similarMovies && similarMovies.length > 0 &&
+                
             <Similar>
                 <SimilarHeader><i> Similar Movies </i></SimilarHeader>
                 <SimilarList>
@@ -111,7 +168,7 @@ const Detailed = ({ movie }) => {
                 </SimilarList>
             </Similar>   
             }
-            {
+            { companies &&
                 companies.length > 0 &&
                 <Similar>
                     <SimilarHeader><i> Production Companies </i></SimilarHeader>
@@ -132,7 +189,7 @@ const Similar = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    padding: 10px 10px;
+    padding: 2rem 3rem;
 `
 const SimilarList = styled.div`
     display: flex;
@@ -147,6 +204,7 @@ const SimilarList = styled.div`
 const SimilarHeader = styled.h3`
     font-weight: 600;
     opacity: 0.9;
+    padding: 1rem;
 `
 
 
@@ -155,15 +213,15 @@ const Movie = styled.div`
     justify-content: flex-start;
     text-align: center;
     align-items: flex-start;
-    height: 231px;
-    margin: 20px 30px;
+    height: --var(231 + 16)px;
+    padding: 1rem 3rem;
     outline: none;
     border-radius: 8px;
     border: none;
     box-shadow : 1px 1px ${ props => props.theme.colors.primary }; 
     @media(min-width: 650px){
-        margin: 50px 60px;
-        height: 513px;
+        padding: 2rem 4rem;
+        height: --var(513 + 2rem)px;
     } 
 `
 
@@ -173,7 +231,7 @@ const Details = styled.div`
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    padding: 10px 5px;
+    padding: 1rem 1rem;
     height: 231px;
     @media(min-width: 650px){
         height: 513px;

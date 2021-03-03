@@ -91,10 +91,11 @@ const CompanyCard = styled.div`
     box-shadow: 1px 1px #e3e3e3;
     border-radius: 8px;
     height: 200px;
-    margin: 5px 10px;
+    width: 100px;
     padding: 5px 10px;
     @media(min-width: 650px){
         height: 240px;
+        width: 200px;
     }
 
 `

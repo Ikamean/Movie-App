@@ -12,6 +12,8 @@ const CategoryCard = ({ movie }) => {
 
     const handleClick = async () => {
 
+        localStorage.setItem('currentMovieId',movie.id);
+        
         await dispatch( initializeCurrentMovie(movie.id) );
 
         history.push(`/movie/${movie.title}`);

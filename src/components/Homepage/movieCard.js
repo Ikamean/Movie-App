@@ -1,89 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
-import { rateMovie } from '../../services/guestSession';
-import { userMarkFavouriteMovie } from '../../services/userSession'
-import { FcLikePlaceholder, FcLike } from "react-icons/fc";
+
 import styled from 'styled-components';
-import {initializeGuestRatedMovies} from '../../redux/reducers/guestMoviesReducer';
-import { initializeUserFavourites } from '../../redux/reducers/userSessionReducer';
+
 
 const MovieCard = ({ movie }) => {
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const history = useHistory();
     const dispatch = useDispatch();
 
-    // to check if any Session is open to display favourites button.
-    const guestSession = localStorage.getItem('guestSessionID');
-    const userSession = localStorage.getItem('userSessionID');
-    const accountId = localStorage.getItem('accountId');
-
-    const [ favourite, setFavourite ] = useState(false);
-
-    const guestFavourites = useSelector( state => state.guestSession.guestRatedMovies);
-    const userFavourites = useSelector( state => state.userSession.userFavourites);
-
-    let hideFavouriteButton = true;
-
-    if(guestSession){
-        hideFavouriteButton = guestFavourites.some( f => f.id === movie.id );
-    }
-    if(userSession){
-        hideFavouriteButton = userFavourites.some( f => f.id === movie.id );
-    }
-
-
-    const movie_id = movie.id;
-    const rating = 10;
+    
 
     const handleClick = async () => {
-
-        await dispatch( initializeCurrentMovie(movie.id) );
-
+        //await dispatch( initializeCurrentMovie(movie.id) );
+        localStorage.setItem('currentMovieId',movie.id);
         history.push(`/movie/${movie.title}`);
-
     }
-
-    const handleRate = async (e) => {
-        e.preventDefault()
-        
-        setFavourite(true)
-
-        if(guestSession){
-            await rateMovie(movie_id, rating, 'guest_session_id', guestSession)
-            await dispatch(initializeGuestRatedMovies(guestSession))
-        }
-        if(userSession){
-            await userMarkFavouriteMovie(accountId,userSession,movie.id,true)
-            await dispatch(initializeUserFavourites(userSession))
-        }
-        
-    }
-    const handleDeleteFavourite = async (e) =>{
-        e.preventDefault()
-
-        
-
-        setFavourite(false);
-
-        await userMarkFavouriteMovie(accountId,userSession,movie.id,false)
-        await dispatch(initializeUserFavourites(userSession))
-    }
-
-
+    
     return(
         <Card>
-                <Heart>
-                    { (guestSession || userSession) &&
-                    !favourite && !hideFavouriteButton  ?
-                        <HeartBtn onClick={(e)=> handleRate(e)}><FcLikePlaceholder /></HeartBtn> : 
-                        userSession ? 
-                        <HeartBtn onClick={(e)=> handleDeleteFavourite(e)}><FcLike /></HeartBtn> :
-                        guestSession && <DisabledHeartBtn > <FcLike /> </DisabledHeartBtn> 
-                        
-                    }
-                </Heart>     
             <div onClick={()=>handleClick()}>
                 {
                     movie.poster_path ? 
@@ -148,38 +85,23 @@ export const NoPoster = styled.img`
 const Card = styled.div`
     cursor: pointer;
     border-radius: 30px;
-    padding: 10px;
+    padding: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     height: 100%;
 `
 export const Heart = styled.div`
-    width: 100%;
-`
-export const DisabledHeartBtn = styled.button`
-    width:100%;
-    padding: 10px;
-    border: none;
-    outline: none;
-    border-radius: 30px;
-    border: none;
-    background-color: transparent;
-    margin-bottom: 10px;
-    transition: all 0.5s ease;
-`
-export const HeartBtn = styled.button`
-    width:92px;
-    padding: 10px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
     cursor: pointer;
     border: none;
     outline: none;
-    border-radius: 30px;
-    background-color: transparent;
-    margin-bottom: 10px;
-    transition: all 0.5s ease;
-    @media(min-width:650px){
-        width: 154px;
+    border-radius: 1rem;
+    &:hover{
+        background-color: ${ props => props.theme.colors.red };
+        transition: all 0.5s ease;
     }
-    
 `

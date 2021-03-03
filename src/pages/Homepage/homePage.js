@@ -40,14 +40,20 @@ export default Home
 const CategoryList = styled.div`
     display: flex;
     flex-direction: column;
-    padding: 20px;
+    padding: 2rem;
     justify-content: space-between;
     align-items: flex-start;
+    @media(min-width: 650px){
+        padding: 2rem 4rem;
+    }
 `
 
 const CategoryHeader = styled.h2`
     font-size: 1.5em;
     font-weight: 600;
-    padding-bottom: 10px;
-    padding-top: 20px;
+
+    padding: 2rem 0px 1rem 1rem;
+    @media(min-width: 650px){
+        padding: 3rem 0px 2rem 1rem;
+    }
 `

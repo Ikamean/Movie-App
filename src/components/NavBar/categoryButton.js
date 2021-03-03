@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { initializeCategory } from '../../redux/reducers/categoryReducer';
@@ -9,20 +9,21 @@ const CategoryButton = ({ value }) => {
     const history = useHistory();
 
     const handleClick = () => {
+
         
+        localStorage.setItem('category', value);
         dispatch( initializeCategory(value));
+
         history.push(`/category`);
+
     }
 
-    const handleFavourite = () =>{
-        history.push('/favourites');
-        //window.location.reload(true);
-    }
 
+    
     if( value === 'Favourites'){
         return(
             
-            <CategoryBtn onClick={()=>handleFavourite()}>{value}</CategoryBtn>
+            <CategoryBtn onClick={()=>history.push('/favourites')}>{value}</CategoryBtn>
         ) 
     }
 

@@ -4,7 +4,7 @@ import { initializeGuestRatedMovies } from '../../redux/reducers/guestMoviesRedu
 import { initializeUserFavourites } from '../../redux/reducers/userSessionReducer';
 
 import CategoryCard from '../../components/CategoryPage/categoryCard';
-import { CategoryWrapper, CategoryTitle, GridList } from '../CategoryPage/categoryPage';
+import { GridList, GridWrapper } from '../CategoryPage/categoryPage';
 import { NotFound } from '../SearchPage/searchResult';
 
 const RatedMovies = () => {
@@ -37,16 +37,13 @@ const RatedMovies = () => {
             )
         }
         return(
-            <CategoryWrapper>
-                <CategoryTitle>Favourite Movies</CategoryTitle>
-                {  
-                <GridList>
+                <GridWrapper >
+                    <GridList>
 
-                    { guestMovies.map( g => <CategoryCard key={g.id} movie={g} /> ) }
+                        { guestMovies.map( g => <CategoryCard key={g.id} movie={g} /> ) }
 
-                </GridList>
-                }
-            </CategoryWrapper>
+                    </GridList>
+                </GridWrapper>
         )
     }
 
@@ -59,16 +56,12 @@ const RatedMovies = () => {
             )
         }
         return(
-            <CategoryWrapper>
-                <CategoryTitle>Favourite Movies</CategoryTitle>
-                {   userMovies.length > 0 ?
+            <GridWrapper>
                     <GridList>
                         { userMovies.map( u => <CategoryCard key={u.id} movie={u} /> ) }
                     </GridList>
-                    :
-                    <NotFound>No Movies to show</NotFound>
-                }
-            </CategoryWrapper>
+            </GridWrapper>
+        
         )
     }
 
