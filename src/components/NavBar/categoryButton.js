@@ -1,16 +1,18 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { initializeCategory } from '../../redux/reducers/categoryReducer';
 import styled from 'styled-components';
+import { initializeHamburger } from '../../redux/reducers/hamburgerReducer';
 
 const CategoryButton = ({ value }) => {
     const dispatch = useDispatch();
+    const hamburger = useSelector( state => state.hamburger.open );
     const history = useHistory();
 
     const handleClick = () => {
 
-        
+        dispatch( initializeHamburger(!hamburger))
         localStorage.setItem('category', value);
         dispatch( initializeCategory(value));
 
@@ -18,19 +20,27 @@ const CategoryButton = ({ value }) => {
 
     }
 
+    const handleExceptionCategory = (value) => {
+
+        dispatch( initializeHamburger(!hamburger))
+        history.push(`/${value}`)
+    }
+
+
+
 
 
     
     if( value === 'Favourites'){
         return(
             
-            <CategoryBtn onClick={()=>history.push('/favourites')}>{value}</CategoryBtn>
+            <CategoryBtn onClick={()=>handleExceptionCategory('favourites')}>{value}</CategoryBtn>
         ) 
     }
 
     if( value === 'Latest'){
         return(
-            <CategoryBtn onClick={()=> history.push('/latest')}>{value}</CategoryBtn>
+            <CategoryBtn onClick={()=> handleExceptionCategory('latest')}>{value}</CategoryBtn>
         ) 
     }
 
@@ -52,9 +62,10 @@ const CategoryBtn = styled.button`
     cursor: pointer;
     border-radius: 8px;
     width: 100%;
-    @media (max-width: 360px) {
+    @media (max-width: 650px) {
     padding: 2px;
-    font-size: 13px;
+    font-size: 1rem;
+    color: ${ props => props.theme.colors.white }
   }
 
     &:hover{    

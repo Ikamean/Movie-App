@@ -73,6 +73,9 @@ export const MovieDate = styled.p`
 export const Poster = styled.img`
     border-radius: 8px;
     cursor: pointer;
+    &:hover{
+        opacity: 0.8;
+    }
     
 `
 export const NoPoster = styled.img`
