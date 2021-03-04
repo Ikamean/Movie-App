@@ -22,7 +22,8 @@ const CategoryList = () => {
 
             <CategoryDiv open={hamburger}>
             {
-                categoryArray.map( c => <CategoryButton  key={c} value={c} /> )
+                categoryArray.map( c => 
+                <ButtonContainer key={c} > <CategoryButton   value={c} /> </ButtonContainer> )
             }
         </CategoryDiv>
         </>
@@ -45,7 +46,6 @@ const CategoryDiv = styled.div`
     justify-content: space-evenly;
     align-items: center;
     height: 100vh;
-    width: 100%;
     margin: 1rem;
     background-color: ${ props => props.theme.colors.primary };
     color: ${ props => props.theme.colors.white }
@@ -66,4 +66,10 @@ const Hamburger = styled.button`
             transition: 0.5s all ease;
         }
     }
+`
+const ButtonContainer = styled.div`
+    display:flex;
+    justify-content:flex-start;
+    align-items: center;
+    width: 20%;
 `
