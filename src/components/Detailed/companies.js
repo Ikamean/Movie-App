@@ -52,9 +52,7 @@ const Company = ({ company }) => {
             </a>
             :
             <CompanyCard>
-                <CompanyName>
-                    {company.name}
-                </CompanyName>
+                
                 <CompanyImg>
                 {
                         company.logo_path ? 
@@ -69,10 +67,13 @@ const Company = ({ company }) => {
     
                         : 
     
-                            <img src={require('../../Media/noposter.svg').default} width="92" height="138" alt='No Poster Available' />
+                            <NoPoster src={require('../../Media/noposter.svg').default} width="92" height="138" alt='No Poster Available' />
                         
                     } 
                 </CompanyImg>
+                <CompanyName>
+                    {company.name}
+                </CompanyName>
             </CompanyCard>
         
     )
@@ -85,14 +86,16 @@ export default Company
 const CompanyCard = styled.div`
     display:flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
+    text-align: center;
     border: 1px solid #e3e3e3;
     box-shadow: 1px 1px #e3e3e3;
     border-radius: 8px;
     height: 200px;
     width: 100px;
     padding: 5px 10px;
+    margin: 0px 10px;
     @media(min-width: 650px){
         height: 240px;
         width: 200px;
@@ -105,4 +108,10 @@ const CompanyName = styled.h4`
 
 const CompanyImg = styled.div`
     
+`
+
+const NoPoster = styled.img`
+    @media(min-width: 650px){
+        width: 176px;
+    }
 `

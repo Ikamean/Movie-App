@@ -92,17 +92,3 @@ const Card = styled.div`
     justify-content: space-evenly;
     height: 100%;
 `
-export const Heart = styled.div`
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    cursor: pointer;
-    border: none;
-    outline: none;
-    border-radius: 1rem;
-    &:hover{
-        background-color: ${ props => props.theme.colors.red };
-        transition: all 0.5s ease;
-    }
-`

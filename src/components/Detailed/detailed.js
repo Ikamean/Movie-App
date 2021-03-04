@@ -5,7 +5,6 @@ import { TiMediaPlay } from 'react-icons/ti';
 import { BsFillStarFill } from 'react-icons/bs';
 import Company from './companies';
 import CategoryCard from '../CategoryPage/categoryCard';
-import { Heart } from '../Homepage/movieCard';
 import { FcLikePlaceholder, FcLike } from "react-icons/fc";
 import { rateMovie } from '../../services/guestSession';
 import { userMarkFavouriteMovie } from '../../services/userSession';
@@ -95,14 +94,16 @@ const Detailed = ({ movie }) => {
                 <Details>
                     {
                         (guestSession || userSession) &&
-                        <Heart onClick={()=>handleFavourite()}>
+                        
+
+                    <Heart onClick={()=>handleFavourite()} >
                         
                         {
                              // Handling Guest Session Liking
                             guestSession && !favourite && <FcLikePlaceholder />
                         }
                         {
-                            guestSession && favourite && <FcLike />
+                            guestSession && favourite && <FcLike /> 
                         }
 
                          {  // Handling User Session Liking and disliking
@@ -113,6 +114,7 @@ const Detailed = ({ movie }) => {
                         }
                     
                     </Heart>
+
                     }
                         
                         
@@ -189,6 +191,24 @@ const MovieDetailsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+`
+
+const Heart = styled.div`
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.2rem 0.1rem;
+    width: 100%;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 1rem;
+    &:hover{
+    background-color: ${ props => props.theme.colors.primary };
+    padding: 0.5rem 1.5rem;
+    font-size: 1.5rem;
+    transition:  all 0.5s ease;
+    }
 `
 
 export const Similar = styled.div`

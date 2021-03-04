@@ -42,8 +42,9 @@ const CategoryCard = ({ movie }) => {
                         
                     } 
                 
-                    <CategoryTitle> { movie.title } </CategoryTitle>
-                </PosterTitle>    
+                    
+                </PosterTitle>
+                    <CategoryTitle onClick={()=>handleClick()}> { movie.title } </CategoryTitle>    
                     <MovieDate>{ movie.release_date }</MovieDate>
             </BorderWrapper>
             
@@ -59,12 +60,15 @@ export default CategoryCard
 const BorderWrapper = styled.div`
     display:flex;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: space-between;
     align-items: center;
     border: 1px solid #e3e3e3;
     box-shadow: 1px 1px #e3e3e3;
     border-radius: 8px;
-    height: 100%;
+    height: 200px;
+    @media (min-width: 650px) {
+    height: 350px;
+  }
 `
 
 const PosterTitle = styled.div`
@@ -91,6 +95,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     padding: 10px;
+    margin: 10px 0px;
     display: flex;
     align-items: center;
     justify-content: flex-start;

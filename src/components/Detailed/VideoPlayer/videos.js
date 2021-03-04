@@ -40,7 +40,8 @@ const Video = () => {
 
 
     return(
-        <Similar>
+            videoList.length > 0 &&
+            <Similar>
             <SimilarHeader>
                 Media
             </SimilarHeader>
@@ -53,6 +54,7 @@ const Video = () => {
             </SimilarList>
             
         </Similar>
+        
     )
 }
 

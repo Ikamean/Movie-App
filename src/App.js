@@ -4,7 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { initializeConfiguration } from './redux/reducers/configReducer';
 import { initializePopular, initializeLatest, initializeTopRated, initializeUpcoming } from './redux/reducers/movieReducer';
 import { initializeGenres } from './redux/reducers/genresReducer';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import Home from './pages/Homepage/homePage';
 import MoviePage from './pages/MoviePage/moviePage';
 import CategoryPage from './pages/CategoryPage/categoryPage';
