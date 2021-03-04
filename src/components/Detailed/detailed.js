@@ -11,7 +11,7 @@ import { rateMovie } from '../../services/guestSession';
 import { userMarkFavouriteMovie } from '../../services/userSession';
 import {initializeGuestRatedMovies} from '../../redux/reducers/guestMoviesReducer';
 import { initializeUserFavourites } from '../../redux/reducers/userSessionReducer';
-
+import Video from './VideoPlayer/videos';
 
 const Detailed = ({ movie }) => {
 
@@ -71,7 +71,7 @@ const Detailed = ({ movie }) => {
     }, [favourite,trigger])
 
     return(
-        <div>
+        <MovieDetailsWrapper>
             <Movie>
                 <Image>
                 {
@@ -168,6 +168,7 @@ const Detailed = ({ movie }) => {
                 </SimilarList>
             </Similar>   
             }
+            <Video />
             { companies &&
                 companies.length > 0 &&
                 <Similar>
@@ -177,21 +178,27 @@ const Detailed = ({ movie }) => {
                     </SimilarList>
                 </Similar>
             }
-        </div>   
+            
+        </MovieDetailsWrapper>   
     )
 }
 
 export default Detailed
 
+const MovieDetailsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+`
 
-const Similar = styled.div`
+export const Similar = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     padding: 2rem 3rem;
 `
-const SimilarList = styled.div`
+export const SimilarList = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
@@ -201,7 +208,7 @@ const SimilarList = styled.div`
     height: 100%;
 
 `
-const SimilarHeader = styled.h3`
+export const SimilarHeader = styled.h3`
     font-weight: 600;
     opacity: 0.9;
     padding: 1rem;
@@ -245,6 +252,7 @@ const TitleAndRelease = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: flex-start;
+    text-align: left;
     color: ${ props => props.theme.colors.black };
 `
 const Title = styled.h2`
@@ -272,7 +280,7 @@ const ReleaseDate = styled.p`
     font-size: 1rem;
     
     @media(max-width: 400px){
-        font-size: 0.8rem;
+        font-size: 0.6rem;
     }
 `
 
@@ -336,12 +344,13 @@ const TaglineContainer = styled.div`
     justify-content: flex-start;
     align-items: center;
     padding-top: 10px ;
+    text-align: left;
 `
 const Tagline = styled.h3`
     opacity: 0.8;
     color: ${ props => props.theme.colors.primary };
     @media(max-width: 400px){
-        font-size: 1rem;
+        font-size: 0.8rem;
     }
 `
 // Overwiev
@@ -355,6 +364,7 @@ const OverviewContainer = styled.div`
         align-items: flex-start;
         padding: 10px 0px;
         opacity: 0.8;
+        text-align: left;
     }
     
 

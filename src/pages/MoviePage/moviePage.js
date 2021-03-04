@@ -5,10 +5,12 @@ import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
 import { initializeSimilar } from '../../redux/reducers/similarReducer';
 
 
+
 const MoviePage = () => {
     const currentMovie = useSelector( state => state.current.current );
     const dispatch = useDispatch();
     const currentId = Number(localStorage.getItem('currentMovieId'));
+    
     
     
     const similarMovies = async () => {

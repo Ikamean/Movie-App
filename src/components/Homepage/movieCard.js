@@ -1,7 +1,7 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { initializeCurrentMovie } from '../../redux/reducers/currentReducer';
+
 
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ import styled from 'styled-components';
 const MovieCard = ({ movie }) => {
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const history = useHistory();
-    const dispatch = useDispatch();
+
 
     
 
@@ -73,6 +73,7 @@ export const MovieDate = styled.p`
 export const Poster = styled.img`
     border-radius: 8px;
     cursor: pointer;
+    
 `
 export const NoPoster = styled.img`
     cursor: pointer;

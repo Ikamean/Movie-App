@@ -10,6 +10,7 @@ import loginReducer from './reducers/loginReducer';
 import guestMoviesReducer from './reducers/guestMoviesReducer';
 import sessionUserReducer from './reducers/userSessionReducer';
 import similarReducer from './reducers/similarReducer';
+import youtubeReducer from './reducers/youtubeReducer';
 
 const reducer = combineReducers({
     config : configReducer,
@@ -21,7 +22,8 @@ const reducer = combineReducers({
     login : loginReducer,
     guestSession : guestMoviesReducer,
     userSession : sessionUserReducer,
-    similar : similarReducer
+    similar : similarReducer,
+    youtube: youtubeReducer
 })
 
 const store = createStore(reducer,applyMiddleware(thunk))
