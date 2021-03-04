@@ -75,6 +75,6 @@ const CategoryBtn = styled.button`
 
     &:active{
         box-shadow: 1px 1px ${ props => props.theme.colors.secondary };
-        
+        transition: all 0.5s ease;
     }
 `

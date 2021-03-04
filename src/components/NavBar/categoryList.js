@@ -63,6 +63,7 @@ const Hamburger = styled.button`
         font-size: 2rem;
         &:active{
             color: ${ props => props.theme.colors.secondary };
+            transition: 0.5s all ease;
         }
     }
 `
