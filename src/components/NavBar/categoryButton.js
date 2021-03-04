@@ -61,6 +61,7 @@ const CategoryBtn = styled.button`
     font-weight: 600;
     cursor: pointer;
     border-radius: 8px;
+    width: 100%;
     @media (max-width: 650px) {
     padding: 2px;
     font-size: 1rem;
