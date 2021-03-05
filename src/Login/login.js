@@ -126,7 +126,7 @@ const Login = () => {
         return(
             <DIV>
                 <Button bgColor='yellow' onClick={()=>handleGuestLogin()}>Guest <FaUserSecret/> </Button>
-                <a href={`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000`} >
+                <a href={`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=https://bitcamp-movie-app.herokuapp.com/`} >
                     <Button onClick={()=>handleAuthentication()}>
                 User <FaUserCircle />
                     </Button> 

@@ -4,8 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { AiFillStar } from 'react-icons/ai';
 import { MdLanguage } from 'react-icons/md';
 import { GiExpand } from 'react-icons/gi';
-
-
 import styled from 'styled-components';
 
 
@@ -14,8 +12,6 @@ const MovieCard = ({ movie }) => {
 
     const imgBaseUrl = useSelector( state => state.config.imagesConfig.secure_base_url);
     const history = useHistory();
-
-    console.log(movie);
     
 
     const handleClick = async () => {
