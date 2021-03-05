@@ -25,14 +25,31 @@ const MovieCard = ({ movie }) => {
             
             <div>
                 <ExpandBtn onClick={()=>setOpenImage(!openImage)}>
-                    <GiExpand />
+                    {movie.poster_path && <GiExpand />} 
                 </ExpandBtn>
                 <div onClick={()=>handleClick()}>
                     {
                     openImage && 
-                    <Poster loading='lazy' 
-                    src={ `${imgBaseUrl}w300${movie.poster_path}`}
-                    alt='Movie Poster'/>
+                    <ExpandedDetails>
+                        <Poster loading='lazy' 
+                        src={ `${imgBaseUrl}w300${movie.poster_path}`}
+                        alt='Movie Poster'/>
+                        <ExpandText>
+                            <ExpandedTitle>
+                                {movie.original_title}
+                            </ExpandedTitle>
+
+                            <VoteAverage>
+                                <AiFillStar /> {movie.vote_average}
+                            </VoteAverage>
+
+                            <VoteAverage>
+                                <MdLanguage /> {movie.original_language}
+                            </VoteAverage>
+                            {movie.overview}
+                            
+                        </ExpandText>
+                    </ExpandedDetails>
                     }   
                 </div>
                 
@@ -46,13 +63,13 @@ const MovieCard = ({ movie }) => {
                                 {movie.original_title}
                             </div>
 
-                            <div>
+                            <VoteAverage>
                                 <AiFillStar /> {movie.vote_average}
-                            </div>
+                            </VoteAverage>
 
-                            <div>
+                            <VoteAverage>
                                 <MdLanguage /> {movie.original_language}
-                            </div>
+                            </VoteAverage>
 
                             
                             
@@ -77,8 +94,9 @@ const MovieCard = ({ movie }) => {
                     
                 }
                 
-                <Title>{movie.title}</Title>
+                
                 </HoverableImage>
+                <Title>{movie.title}</Title>
             </div>
                 <MovieDate>{movie.release_date}</MovieDate>
             
@@ -89,6 +107,7 @@ const MovieCard = ({ movie }) => {
 }
 
 export default MovieCard;
+
 
 
 const ExpandBtn = styled.button`
@@ -104,8 +123,44 @@ const ExpandBtn = styled.button`
             font-size: 1rem;
         }
     }
-    
-
+`
+const ExpandedDetails = styled.div`
+    display: flex;
+    width: 600px;
+    align-items: flex-start;
+    height: 450px;
+    border-radius: 8px;
+    background-color: ${ props => props.theme.colors.white };
+    margin-bottom: 0.5em;
+`
+const ExpandText = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+    padding: 1rem;
+    line-height: 1.1rem;
+    font-weight: 500;
+    color: black;
+    height: 100%;
+    border-right: 1px dotted ${ props => props.theme.colors.primary };
+    border-radius: 8px;
+    opacity: 0.9;
+`
+const ExpandedTitle = styled.div`
+    margin-bottom: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1.5rem;
+    &:hover{
+        color: ${ props => props.theme.colors.primary }
+    }
+`
+const VoteAverage = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `
 
 const HoverableText = styled.div`
