@@ -23,6 +23,7 @@ const CategoryList = () => {
                     <HamburgerMenu open={hamburger}>
                         {
                             categoryArray.map( c => 
+                            
                             <CategoryButton key={c}  value={c} />  )
                         }
                     </HamburgerMenu>
@@ -60,27 +61,27 @@ const HamburgerContainer = styled.div`
 const HamburgerMenu = styled.div`
     display: ${ props => props.open ? "flex" : "none"};
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     position: fixed;
     left: 0;
     right: 0;
     top: 0;
     bottom: 0;
-    background-color: ${ props => props.theme.colors.primary };
+    background-color: ${ props => props.theme.colors.white };
     z-index: 1;
 `
 const Hamburger = styled.button`
     
         margin: 0 0 0 1rem ;
-        position: fixed;
+        position: absolute;
         left: 80px;
         top: 1rem;
         z-index: 2;
-        background-color: ${ props => props.theme.colors.primary };
+        background-color: transparent;
         border:none;
         outline: none;
-        color: ${ props => props.theme.colors.white };
+        color: ${ props => props.theme.colors.tertiary };
         font-size: 2rem;
         &:active{
             color: ${ props => props.theme.colors.secondary };

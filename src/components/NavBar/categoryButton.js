@@ -65,16 +65,15 @@ const CategoryBtn = styled.button`
     text-align: left;
 
     @media (max-width: 650px) {
-    padding: 1rem;
+    padding: 2rem;
     font-size: 1.5rem;
-    text-align: center;
-
+    text-align: left;
     //display: block;
     font-weight: 400;
-    color: ${ props => props.theme.colors.white };
-    &:hover{    
-        color: ${ props => props.theme.colors.secondary };
-        opacity: 0.8;
+    color: ${ props => props.theme.colors.black };
+    border-bottom: 1px solid ${ props => props.theme.colors.grey };
+    &:active{
+        background-color: #f8f9fa;    
         transition: all 0.5s ease;
     }
     
@@ -87,8 +86,4 @@ const CategoryBtn = styled.button`
         }
     }
 
-    &:active{
-        box-shadow: 1px 1px ${ props => props.theme.colors.secondary };
-        transition: all 0.5s ease;
-    }
 `
