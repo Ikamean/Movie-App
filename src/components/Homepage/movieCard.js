@@ -27,7 +27,6 @@ const MovieCard = ({ movie }) => {
                 <ExpandBtn onClick={()=>setOpenImage(!openImage)}>
                     <GiExpand />
                 </ExpandBtn>
-               
                 <div onClick={()=>handleClick()}>
                     {
                     openImage && 
@@ -90,6 +89,7 @@ const MovieCard = ({ movie }) => {
 }
 
 export default MovieCard;
+
 
 const ExpandBtn = styled.button`
     display: none;

@@ -16,17 +16,17 @@ const CategoryList = () => {
 
     return(
         <>  
-        <HamburgerContainer open={hamburger}>
-            <Hamburger onClick={()=>handleHamburger()}> 
-            { !hamburger ? <ImMenu3 /> :  <ImMenu4 />  }
-            </Hamburger>
-                <HamburgerMenu open={hamburger}>
-                    {
-                        categoryArray.map( c => 
-                        <CategoryButton key={c}  value={c} />  )
-                    }
-                </HamburgerMenu>
-        </HamburgerContainer>            
+            <HamburgerContainer>
+                <Hamburger onClick={()=>handleHamburger()}> 
+                { !hamburger ? <ImMenu3 /> :  <ImMenu4 />  }
+                </Hamburger>
+                    <HamburgerMenu open={hamburger}>
+                        {
+                            categoryArray.map( c => 
+                            <CategoryButton key={c}  value={c} />  )
+                        }
+                    </HamburgerMenu>
+            </HamburgerContainer>      
             
 
         <DropDown>
@@ -53,8 +53,7 @@ export default CategoryList
 const HamburgerContainer = styled.div`
     display: none;
     @media(max-width: 650px){
-        position: relative;
-        display: inline-block;
+        display: fixed;
     }
 `
 
@@ -62,18 +61,22 @@ const HamburgerMenu = styled.div`
     display: ${ props => props.open ? "flex" : "none"};
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: flex-end;
+    align-items: center;
     position: fixed;
-    height: 100vh;
-    width: 100vw;
     left: 0;
     right: 0;
+    top: 0;
+    bottom: 0;
     background-color: ${ props => props.theme.colors.primary };
     z-index: 1;
 `
 const Hamburger = styled.button`
     
         margin: 0 0 0 1rem ;
+        position: fixed;
+        left: 80px;
+        top: 1rem;
+        z-index: 2;
         background-color: ${ props => props.theme.colors.primary };
         border:none;
         outline: none;

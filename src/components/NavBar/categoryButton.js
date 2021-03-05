@@ -65,10 +65,9 @@ const CategoryBtn = styled.button`
     text-align: left;
 
     @media (max-width: 650px) {
-    padding: 2px;
+    padding: 1rem;
     font-size: 1.5rem;
-    width: 60%;
-    text-align: left;
+    text-align: center;
 
     //display: block;
     font-weight: 400;
