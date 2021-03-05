@@ -62,16 +62,31 @@ const CategoryBtn = styled.button`
     cursor: pointer;
     border-radius: 8px;
     width: 100%;
+    text-align: left;
+
     @media (max-width: 650px) {
     padding: 2px;
-    font-size: 1rem;
-    color: ${ props => props.theme.colors.white }
-  }
+    font-size: 1.5rem;
+    width: 60%;
+    text-align: left;
 
+    //display: block;
+    font-weight: 400;
+    color: ${ props => props.theme.colors.white };
     &:hover{    
         color: ${ props => props.theme.colors.secondary };
+        opacity: 0.8;
         transition: all 0.5s ease;
-    }   
+    }
+    
+    }
+    @media (min-width: 650px){
+        font-weight: 400;
+        color: ${ props => props.theme.colors.black };
+        &:hover{
+            background-color: #f8f9fa;
+        }
+    }
 
     &:active{
         box-shadow: 1px 1px ${ props => props.theme.colors.secondary };

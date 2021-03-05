@@ -126,7 +126,7 @@ const Login = () => {
         return(
             <DIV>
                 <Button bgColor='yellow' onClick={()=>handleGuestLogin()}>Guest <FaUserSecret/> </Button>
-                <a href={`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=https://bitcamp-movie-app.herokuapp.com/`} >
+                <a href={`https://www.themoviedb.org/authenticate/${requestToken}?redirect_to=http://localhost:3000`} >
                     <Button onClick={()=>handleAuthentication()}>
                 User <FaUserCircle />
                     </Button> 
@@ -141,35 +141,42 @@ export default Login
 
 const DIV = styled.div`
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
+    width: 100%;
+    
 `
 const Button = styled.button`
-    padding: 10px;
+    padding: 0.5rem;
+    margin-right: 1rem;
     cursor: pointer;
     width: 100px;
     border-radius: 8px;
     border: 1px solid transparent;
-    background-color: ${ props => props.theme.colors.white };
+    background-color: ${ props => props.theme.colors.grey };
+    color: ${ props => props.theme.colors.white };
     outline:none;
-    margin-top: 5px;
-
+    font-weight: 700;
     &:hover{
-        background-color: ${ props => props.theme.colors.tertiary };
+        opacity: 0.7;
         transition: all 0.5s ease;
+        padding: 0.4rem;
+        font-size: 0.9rem;
     }
     &:active{
         border: 1px solid transparent;
+    }
+    @media(max-width: 360px){
+        width: 60px;
     }
 `
 
 const AccountCircle = styled.div`
     width: 100%;
-    padding: 10px;
-    border-radius: 8px;
     display:flex;
-    justify-content: space-evenly;
+    justify-content: flex-end;
     align-items: center;
-    background-color: ${ props => props.theme.colors.tertiary }
+    margin-right: 0.5rem;
+    color: ${ props => props.theme.colors.white };
+    font-size: 1.2rem;
 `

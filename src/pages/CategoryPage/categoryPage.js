@@ -13,7 +13,6 @@ const CategoryPage = () => {
 
     const history = useHistory();
 
-    console.log(category);
 
 
 

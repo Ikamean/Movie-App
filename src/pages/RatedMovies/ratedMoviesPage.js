@@ -26,6 +26,7 @@ const RatedMovies = () => {
 
     useEffect(()=>{
         favoriteMovieInitialization();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     },[]) 
 
     if(guestSession){

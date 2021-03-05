@@ -17,17 +17,20 @@ const NavBar = () => {
     }
 
     return(
-        <NAVBARCONTAINER>
-                    <Search />
+        <NAVBARCONTAINER> 
+            
             <LogoAndAcc>
-                    <LogoBtn onClick={()=>handleClick()}><img alt="TMDBLogo" src={require('../Media/logo.svg').default} width="100" height="73.66" /> </LogoBtn>
+
+                    <LogoBtn onClick={()=>handleClick()}><img alt="TMDBLogo" src={require('../Media/logo.svg').default} width="50" height="30" /> </LogoBtn>
                 
-                <Login />
+                    <CategoryList />
+
+                    <Login />
 
             </LogoAndAcc>
 
+            <Search />
                     
-                    <CategoryList />
                 
         </NAVBARCONTAINER>
     )
@@ -39,24 +42,23 @@ const NAVBARCONTAINER = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    padding: 10px;
     background-color: ${ props => props.theme.colors.primary };
-    @media (max-width: 360px) {
-    justify-content: center;
-    font-size: 14px;
-    }
 `
 
 const LogoAndAcc = styled.div`
     display: flex;
     justify-content: space-between;
+    align-items: center;
 `
 
 const LogoBtn = styled.button`
     border-radius: 8px;
+    margin: 1rem 1rem 1rem 1rem;
     border: 1px solid transparent;
     outline: none;
     cursor: pointer;
     background-color: transparent;
-    padding: 10px;
+    &:hover{
+        opacity: 0.8;
+    }
 `

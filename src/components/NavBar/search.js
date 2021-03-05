@@ -20,7 +20,6 @@ const Search = () => {
         let value = localStorage.getItem('searchValue');
         if(value.length > 0){
             await dispatch( initializeSearchedMovies(value) );
-            console.log(search);
             setSearch('');
             history.push('/search');
         }
@@ -40,13 +39,14 @@ export default Search;
 const SearchDiv = styled.div`
     display: flex;
     width: 100%;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     outline: none;
+    padding: 0rem 1rem 1rem 1rem;
 `
 
 const Input = styled.input`
-    width: 80%;
+    width: 75%;
     padding: 10px 20px;
     height: 46px;
     line-height: 46px;
